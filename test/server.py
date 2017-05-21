@@ -1,3 +1,9 @@
+#
+# socket を使った簡単なテスト 2017-05-20
+# サーバー、クライアントとも、sta_ifでWiFiに接続しておく
+# 時間経過により、サーバ、クライアント双方のNeopixelの色が変わる
+# タイマーのオーバーフロー問題ありそう
+#
 from machine import Pin
 from neopixel import NeoPixel
 import socket
@@ -11,9 +17,9 @@ def callback(p): # たぶんこの方法よくない。
 
 p5 = Pin(5, Pin.IN, Pin.PULL_UP) # タイマーをリセットするSWをつなぐ。
 p5.irq(trigger=Pin.IRQ_FALLING, handler=callback)
-pin = Pin(4,Pin.OUT) # NeoPixel signal port
-np = NeoPixel(pin, 1) # use one NeoPixel
-port = 6809
+pin = Pin(4,Pin.OUT) # NeoPixel の信号線を接続
+np = NeoPixel(pin, 1) # NeoPixel は１つ接続
+port = 6809 # 適当
 
 addr = socket.getaddrinfo('0.0.0.0',port)[0][-1]
 s = socket.socket()
