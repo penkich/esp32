@@ -1,3 +1,9 @@
+#
+# socket を使った簡単なテスト 2017-05-20
+# サーバー、クライアントとも、sta_ifでWiFiに接続しておく
+# 時間経過により、サーバ、クライアント双方のNeopixelの色が変わる
+# サーバのIPアドレス調べておく必要ある
+#
 from machine import Pin
 from neopixel import NeoPixel
 import socket
@@ -32,4 +38,4 @@ while True:
     except:
         pass
     s.close()
-    time.sleep(5)
+    time.sleep(5) # 5秒間隔でつなぎにいく
