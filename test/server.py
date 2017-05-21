@@ -3,13 +3,13 @@ from neopixel import NeoPixel
 import socket
 import time
 
-def callback(p):
+def callback(p): # たぶんこの方法よくない。
     global start
     start = time.ticks_ms()
     print(p)
     time.sleep(0.5)
 
-p5 = Pin(5, Pin.IN, Pin.PULL_UP)
+p5 = Pin(5, Pin.IN, Pin.PULL_UP) # タイマーをリセットするSWをつなぐ。
 p5.irq(trigger=Pin.IRQ_FALLING, handler=callback)
 pin = Pin(4,Pin.OUT) # NeoPixel signal port
 np = NeoPixel(pin, 1) # use one NeoPixel
@@ -42,5 +42,5 @@ while True:
     print('client connected from',addr)
     cl.send(bytes(str(delta),'utf8'))
     print(str(delta))
-    led(delta)
+    led(delta) # クライアントからの接続なければ更新されませんね。
     cl.close()
